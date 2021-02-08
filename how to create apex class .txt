@@ -1,0 +1,8 @@
+1. Open the Developer Console 
+   under Your Name or the quick access menu (Setup gear icon).
+2. click on file 
+3. click on new
+4. click apex class
+5. Enter class Name
+6. save 
+
