@@ -22,9 +22,9 @@ Apex :
     11.Easy to test—Apex provides built-in support for unit test creation, execution, and code coverage.
     12.Versioned—Custom Apex code can be saved against different versions of the API.
 
+
 Apex Language Highlights:
     1.  Classes, interfaces, properties, and collections (including arrays).
     2.  Object and array notation.
     3.  Expressions, variables, and constants.
     4.  Conditional statements (if-then-else) and control flow statements (for loops and while loops).
-
