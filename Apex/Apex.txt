@@ -28,3 +28,13 @@ Apex Language Highlights:
     2.  Object and array notation.
     3.  Expressions, variables, and constants.
     4.  Conditional statements (if-then-else) and control flow statements (for loops and while loops).
+    
+Unlike other object-oriented programming languages, Apex supports:
+    1. Cloud development as Apex is stored, compiled, and executed in the cloud.
+    2. Triggers, which are similar to triggers in database systems.
+    3. Database statements that allow you to make direct database calls 
+       and query languages to query and search data.
+    4. Transactions and rollbacks.
+    5. The global access modifier, which is more permissive than the public modifier 
+       and allows access across namespaces and applications.
+    6. In addition, Apex is a case-insensitive language.
