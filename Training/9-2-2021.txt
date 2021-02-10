@@ -1,0 +1,322 @@
+select name,Candidate_Name__r.Name,status__c,Candidate_Name__r.Phone__c,Position_applying_for__r.Name,Position_applying_for__r.Type__c from Job_Application__c
+
+VR
+08:12 AM
+ 
+to Everyone
+
+select name,Candidate_Name__r.Name,status__c,Candidate_Name__r.Phone__c from Job_Application__c
+
+SS
+08:20 AM
+ 
+to Everyone
+select name, (select name,Amount,CloseDate from Opportunities) from Account where name = 'IBM Account'
+
+SS
+08:20 AM
+ 
+to Everyone
+select name, (select name,Amount,CloseDate,StageName from Opportunities) from Account where name = 'IBM Account'
+
+SS
+08:31 AM
+ 
+to Everyone
+List<Account> allAcc= [select name,id, (select name,Amount,CloseDate,StageName from Opportunities) from Account where id = '0015g000003f8eDAAQ'];
+for(Account a : allAcc)
+{
+system.debug('Account name -' + a.name);
+for(Opportunity o: a.Opportunities)
+{
+system.debug('Opportunity name' + o.name + 'Amount -'+ o.Amount +'Close - '+ o.CloseDate+ 'Stage -'+o.StageName);
+}
+}
+
+SS
+08:33 AM
+ 
+to Everyone
+List<Account> allAcc= [select name,id, (select name,Amount,CloseDate,StageName from Opportunities) from Account where name = 'United Oil & Gas Corp.'];
+for(Account a : allAcc)
+{
+system.debug('Account name -' + a.name);
+for(Opportunity o: a.Opportunities)
+{
+system.debug('Opportunity name' + o.name + 'Amount -'+ o.Amount +'Close - '+ o.CloseDate+ 'Stage -'+o.StageName);
+}
+}
+
+AK
+08:37 AM
+ 
+to Everyone
+select name from Job_Application__c where Average_Score__c > 3.5
+
+AK
+08:43 AM
+ 
+to Everyone
+List<Job_Application__c> jobApps = [select name from Job_Application__c where Average_Score__c > 3.5];
+for(Job_Application__c jb: jobApps){
+system.debug('Job Appli. Id - '+ jb.id +' name: '+ jb.name);
+}
+
+CN
+08:46 AM
+ 
+to Everyone
+select Name,Job_Application__r.Name,Interviewer__r.name from Review__c where Job_Application__r.Name = 'JA - 00001'
+
+VM
+08:50 AM
+ 
+to Everyone
+List<Case> allCase= [select name,CaseNumber,Status,ClosedDate from Case where Status = 'Closed', ClosedDate = 1/01/2021 - 31/01/2021];
+for(Case c : allCase)
+{
+system.debug('Case Number' + c.name + 'Status -'+ c.Status +'Close - '+ c.ClosedDate);
+
+}
+
+VM
+08:55 AM
+ 
+to Everyone
+List<Case> allCase= [select name,CaseNumber,ClosedDate from Case where ClosedDate >2021-01-01T00:00:00Z and ClosedDate < 2021-01-31T00:00:00Z
+];
+for(Case c : allCase)
+{
+system.debug('Case Number' + c.name + 'Status -'+'Close - '+ c.ClosedDate);
+
+}
+
+VM
+08:56 AM
+ 
+to Everyone
+List<Case> allCase= [select name,CaseNumber,ClosedDate from Case where ClosedDate >2021-01-01T00:00:00Z and ClosedDate < 2021-01-31T00:00:00Z
+];
+for(Case c : allCase)
+{
+system.debug('Case Number' + c.name +'Close - '+ c.ClosedDate);
+
+}
+
+SM
+09:02 AM
+ 
+to Everyone
+select Name,(select name from Opportunities ),(select name from contacts),(select CaseNumber from Cases) from Account where Account.Name='United Oil & Gas Corp.'
+
+TS
+09:03 AM
+ 
+to Everyone
+anyone completed sarthak's query? please share.
+
+Me
+09:06 AM
+Me
+ 
+to Tanuj Sharma
+Private
+
+select Name,(select name from Opportunities ),(select name from contacts),(select CaseNumber from Cases) from Account where Account.Name='United Oil & Gas Corp.'
+
+HM
+09:30 AM
+ 
+to Everyone
+List<Contact> allContacts = new List<Contact>();
+
+Contact c1 = new Contact(lastname='Wiseman');
+Contact c2 = new Contact();
+Contact c3 = new Contact(lastname='Jonas');
+
+allContacts.add(c1);
+allContacts.add(c2);
+allContacts.add(c3);
+
+List<Database.SaveResult> sr = Database.insert(allcontacts, false);
+
+for(Database.SaveResult s : sr) {
+system.debug('Save Result - ' + s);
+if(s.isSuccess()) {
+system.debug('Record Id - ' + s.getId());
+} else {
+List<Database.Error> errors = s.getErrors();
+for(Database.Error err : errors) {
+system.debug('Error - ' + err.getMessage());
+}
+}
+}
+
+AD
+10:10 AM
+ 
+to Everyone
+Methods defined within an interface have no access modifiers and contain just their signature.
+
+AD
+10:11 AM
+ 
+to Everyone
+https://developer.salesforce.com/docs/atlas.en-us.apexcode.meta/apexcode/apex_classes_interfaces.htm
+
+HM
+10:19 AM
+ 
+to Everyone
+public interface PositionInterface {
+Id newPosition(String name, String description);
+boolean modifyPositionDescription(Id recId, String newDescription);
+boolean modifyPositionStartDate(Id recId, Date newDescription);
+boolean modifyPositionPriority(Id recId, String newPriority);
+boolean modifyPositionDepartment(Id recId, String newDepartment);
+}
+
+HM
+10:19 AM
+ 
+to Everyone
+public class NewPositionManager implements PositionInterface{
+public Id newPosition(String name, String description) {
+return '';
+}
+public boolean modifyPositionDescription(Id recId, String newDescription) {
+return false;
+}
+public boolean modifyPositionStartDate(Id recId, Date newDescription) {
+return false;
+}
+public boolean modifyPositionPriority(Id recId, String newPriority){
+return false;
+}
+public boolean modifyPositionDepartment(Id recId, String newDepartment){
+return false;
+}
+}
+
+VR
+10:58 AM
+ 
+to Everyone
+DONE
+
+SS
+10:59 AM
+ 
+to Everyone
+done
+
+SS
+10:59 AM
+ 
+to Everyone
+public class NewPositionManager implements PositionInterface{
+public Id newPosition(String posname, String description) {
+Position__c pos = new Position__c();
+pos.name = posname;
+pos.Job_Description__c = description;
+insert pos;
+return pos.Id;
+}
+public boolean modifyPositionDescription(Id recId, String newDescription) {
+Position__c pos = new Position__c();
+pos.id = recId;
+pos.Job_Description__c = newDescription;
+update pos;
+return true;
+}
+public boolean modifyPositionStartDate(Id recId, Date newStart) {
+Position__c pos = new Position__c();
+pos.id = recId;
+pos.Start_Date__c = newStart;
+update pos;
+return true;
+}
+public boolean modifyPositionPriority(Id recId, String newPriority){
+Position__c pos = new Position__c();
+pos.id = recId;
+pos.Priority__c = newPriority;
+update pos;
+return true;
+}
+public boolean modifyPositionDepartment(Id recId, String newDepartment){
+Position__c pos = new Position__c();
+pos.id = recId;
+pos.Dep
+
+SS
+11:00 AM
+ 
+to Everyone
+pos.Department__c = newDepartment;
+update pos;
+return true;
+}
+}
+
+TS
+11:17 AM
+ 
+to Everyone
+public class NewPositionManager implements PositionInterface{
+public Id newPosition(String posname, String posdescription) {
+return '';
+}
+public boolean modifyPositionDescription(Id recId, String newDescription) {
+
+update new Position__c(Id = recId, Job_description__c = newDescription);
+
+return true;
+}
+public boolean modifyPositionStartDate(Id recId, Date newDate) {
+update new Position__c(Id = recId, Start_Date__c = newDate);
+return true;
+}
+public boolean modifyPositionPriority(Id recId, String newPriority){
+update new Position__c(Id = recId, Priority__c = newPriority);
+return true;
+}
+public boolean modifyPositionDepartment(Id recId, String newDepartment){
+
+update new Position__c(Id = recId, Departmant__c = newDepartment);
+return true;
+}
+}
+
+TS
+11:18 AM
+ 
+to Everyone
+NewPositionManager n=new NewPositionManager();
+n.modifyPositionDescription('a005g00002pbB1kAAE','New des');
+n.modifyPositionStartDate('a005g00002pbB1kAAE',date.parse('12/27/2078'));
+n.modifyPositionPriority('a005g00002pbB1kAAE','low');
+modifyPositionDepartment('a005g00002pbB1kAAE','Sales');
+
+
+Me
+12:49 PM
+Me
+ 
+to Everyone
+yes sir
+
+HM
+01:02 PM
+ 
+to Everyone
+Job Application Apex class ->
+1. new Job application basis multiple data
+2. Modify existing Job Application
+3. Delete Job Application by Id
+4. Delete Job Application by (Status - Not Intereviewed)
+5. findByPosition
+6. findByCandidate
+7. findByStatus
+8. findByReviewScore
+9. findAll
+
